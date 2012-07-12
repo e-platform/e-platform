@@ -45,6 +45,7 @@ public class MailUtil {
 	public static void send(Message message) throws Exception{
 		Properties props = new Properties();
 		props.put("mail.smtp.host", message.getHost());
+		props.put("mail.smtp.auth", "true");
 		Session session = Session.getInstance(props);
 		Transport bus = session.getTransport("smtp");
 		bus.connect(message.getHost(), message.getUser(), message.getPassword());
@@ -53,7 +54,8 @@ public class MailUtil {
 		msg.setFrom(new InternetAddress(message.getFrom()));
 		InternetAddress[] address = {new InternetAddress(message.getTo())};
 		msg.setRecipients(javax.mail.Message.RecipientType.TO, address);
-		msg.setRecipients(javax.mail.Message.RecipientType.CC,InternetAddress.parse(message.getCc(), true));
+		if(message.getCc() != null)
+			msg.setRecipients(javax.mail.Message.RecipientType.CC,InternetAddress.parse(message.getCc(), true));
 		msg.setSentDate(new Date());
 		msg.setSubject(message.getTitle());
 		
@@ -114,10 +116,12 @@ public class MailUtil {
 	public static void main(String[] args) throws Exception {
 		Message msg = new Message();
 		msg.setFrom("xingzenglong0703@163.com");
-		msg.setTo("zenglongx@gmail.com");
-		msg.setCc("xingzenglong@calandtech.com");
+		msg.setTo("xingzenglong0703@163.com");
+//		msg.setTo("zenglongx@gmail.com");
+//		msg.setCc("xingzenglong@calandtech.com");
 		msg.setText("测试邮件");
 		msg.setTitle("测试标题");
 		MailUtil.send(msg);
+		System.out.println("finish!");
 	}
 }
