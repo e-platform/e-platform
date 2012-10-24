@@ -44,19 +44,20 @@ public class MailUtil {
 	
 	
 	public static void main(String[] args) throws Exception {
+		//html与文本不能一起发
 		Message msg = new Message();
 		msg.setFrom("xingzenglong0703@163.com");
-		msg.setTo("xingzenglong0703@163.com");
+		msg.setTo("flower_ho@126.com");
 //		msg.setTo("zenglongx@gmail.com");
 //		msg.setCc("xingzenglong@calandtech.com");
 		msg.setTitle("测试标题");
 		
 		//发送文本
-		msg.setText("测试邮件");
+//		msg.setText("测试邮件");
 		//发送html
 		msg.setHtml("<html><head><title>有汉字" +
                         "</title></head><body><h1>" +
-                        "</h1><p>汉字This is a test of sending an HTML e-mail" +
+                        "</h1><p>汉字就打瞌睡就爱看附件将控件到拉萨风科技This is a test of sending an HTML e-mail" +
                         " through Java.<a href='http://www.baidu.com'>baidu</a>http://www.baidu.com</body></html>");
 		//发送附件
 		ArrayList<File> files = new ArrayList<File>();
