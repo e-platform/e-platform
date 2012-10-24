@@ -47,10 +47,10 @@ public class MailSender {
 			MimeBodyPart pText = new MimeBodyPart();
 			pText.setText(msg.getText(),CHART_SET);
 			mp.addBodyPart(pText);
-		}
-		if(msg.getHtml() != null){
+		}else if(msg.getHtml() != null){
 			MimeBodyPart pHtml = new MimeBodyPart();
 			pHtml.setContent(msg.getHtml(), "text/html;charset="+CHART_SET);
+			pHtml.setDataHandler(new DataHandler(new HTMLDataSource(msg.getHtml())));
 			mp.addBodyPart(pHtml);
 		}
 		if(msg.getFiles() != null){
